@@ -24,3 +24,32 @@ Route::post('/user/logout', 'Auth\LoginController@logout');
 Route::get('/user/login', 'Auth\LoginController@showLoginForm');
 Route::post('/user/login', 'Auth\LoginController@login');
 /* -------- End of Auth Routes -------- */
+
+/* -------- Start of Backend -------- */
+Route::group(['prefix' => 'admin', 'namespace' => 'admin', 'middleware' => 'auth'], function() {
+    Route::get('/users', 'UserController@index');
+
+    /* -------- Start of Roles -------- */
+    Route::get('/roles', 'RoleController@index');
+    Route::get('/roles/create', 'RoleController@create');
+    Route::post('/roles/create', 'RoleController@store');
+    /* -------- End of Roles -------- */
+
+});
+/* -------- End of Backend -------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
