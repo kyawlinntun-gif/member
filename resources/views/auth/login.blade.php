@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-2 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-2">
                 <div class="well">
                     <form action="{{ url('/user/login') }}" method="post" class="clearfix">
                         @csrf

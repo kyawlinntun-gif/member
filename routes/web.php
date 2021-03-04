@@ -26,8 +26,13 @@ Route::post('/user/login', 'Auth\LoginController@login');
 /* -------- End of Auth Routes -------- */
 
 /* -------- Start of Backend -------- */
-Route::group(['prefix' => 'admin', 'namespace' => 'admin', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'admin', 'namespace' => 'admin', 'middleware' => 'member'], function() {
+
+    /* -------- Start of Users -------- */
     Route::get('/users', 'UserController@index');
+    Route::get('/users/{id}/edit', 'UserController@edit');
+    Route::post('/users/{id}/edit', 'UserController@update');
+    /* -------- End of Users -------- */
 
     /* -------- Start of Roles -------- */
     Route::get('/roles', 'RoleController@index');

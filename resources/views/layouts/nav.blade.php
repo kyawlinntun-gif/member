@@ -36,7 +36,11 @@
             {{--    <button type="submit" class="btn btn-default">Submit</button>--}}
             {{--</form>--}}
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
+                @auth
+                    @if(Auth::user()->hasRole('Manager'))
+                        <li><a href="{{ url('/admin/users') }}">Admin</a></li>
+                    @endif
+                @endauth
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Member <span class="caret"></span></a>
                     <ul class="dropdown-menu">

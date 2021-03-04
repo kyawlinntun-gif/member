@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'All Users')
+@section('title', 'All Roles')
 
 @section('content')
 
@@ -13,16 +13,16 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Email</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($users as $user)
+                            @foreach($roles as $role)
+
                                 <tr>
-                                    <td>{{ $user->id }}</td>
-                                    <td><a href="{{ url('/admin/users/'.$user->id.'/edit') }}">{{ $user->name }}</a></td>
-                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $role->id }}</td>
+                                    <td>{{ $role->name }}</td>
                                 </tr>
+
                             @endforeach
                         </tbody>
                     </table>
