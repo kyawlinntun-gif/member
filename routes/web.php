@@ -28,6 +28,10 @@ Route::post('/user/login', 'Auth\LoginController@login');
 /* -------- Start of Backend -------- */
 Route::group(['prefix' => 'admin', 'namespace' => 'admin', 'middleware' => 'member'], function() {
 
+    /* -------- Start of Admin -------- */
+    Route::get('/', 'AdminController@index');
+    /* -------- End of Admin -------- */
+
     /* -------- Start of Users -------- */
     Route::get('/users', 'UserController@index');
     Route::get('/users/{id}/edit', 'UserController@edit');
@@ -39,6 +43,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin', 'middleware' => 'memb
     Route::get('/roles/create', 'RoleController@create');
     Route::post('/roles/create', 'RoleController@store');
     /* -------- End of Roles -------- */
+
+    /* -------- Start of Categories -------- */
+    Route::get('/categories', 'CategoryController@index');
+    Route::get('/categories/create', 'CategoryController@create');
+    Route::post('/categories/create', 'CategoryController@store');
+    /* -------- End of Categories -------- */
 
 });
 /* -------- End of Backend -------- */

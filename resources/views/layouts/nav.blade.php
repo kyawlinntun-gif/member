@@ -38,7 +38,7 @@
             <ul class="nav navbar-nav navbar-right">
                 @auth
                     @if(Auth::user()->hasRole('Manager'))
-                        <li><a href="{{ url('/admin/users') }}">Admin</a></li>
+                        <li><a href="{{ url('/admin') }}">Admin</a></li>
                     @endif
                 @endauth
                 <li class="dropdown">
