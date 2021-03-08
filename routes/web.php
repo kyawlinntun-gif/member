@@ -25,6 +25,12 @@ Route::get('/user/login', 'Auth\LoginController@showLoginForm');
 Route::post('/user/login', 'Auth\LoginController@login');
 /* -------- End of Auth Routes -------- */
 
+/* -------- Start of PostCreator -------- */
+Route::group(['prefix' => 'postcreator', 'namespace' => 'postcreator', 'middleware' => 'postware'], function() {
+    Route::get('/post/create', 'PostController@create');
+});
+/* -------- End of PostCreator -------- */
+
 /* -------- Start of Backend -------- */
 Route::group(['prefix' => 'admin', 'namespace' => 'admin', 'middleware' => 'member'], function() {
 
@@ -48,6 +54,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin', 'middleware' => 'memb
     Route::get('/categories', 'CategoryController@index');
     Route::get('/categories/create', 'CategoryController@create');
     Route::post('/categories/create', 'CategoryController@store');
+    Route::get('/categories/{id}/edit', 'CategoryController@edit');
+    Route::post('/categories/{id}/edit', 'CategoryController@update');
     /* -------- End of Categories -------- */
 
 });

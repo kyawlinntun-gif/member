@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\PostCreator;
 
 use App\Category;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryInsertFormRequest;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('backend.categories.index', [
-            'categories' => $categories
-        ]);
+        //
     }
 
     /**
@@ -29,7 +25,10 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('backend.categories.create');
+        $categories = Category::all();
+        return view('backend.post.create', [
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -38,10 +37,9 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryInsertFormRequest $request)
+    public function store(Request $request)
     {
-        Category::create(['name' => $request->get('name')]);
-        return redirect('/admin/categories/create')->with('status', 'A Category is successfully inserted Sir!');
+        //
     }
 
     /**
@@ -63,10 +61,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view('backend.categories.edit', [
-            'category' => $category
-        ]);
+        //
     }
 
     /**
@@ -76,11 +71,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryInsertFormRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $category = Category::findOrFail($id);
-        $category->update(['name' => $request->get('name')]);
-        return redirect('/admin/categories/'. $category->id.'/edit')->with('status', 'A Category is successfully updated Sir!');
+        //
     }
 
     /**
