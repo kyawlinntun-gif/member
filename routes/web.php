@@ -26,12 +26,16 @@ Route::post('/user/login', 'Auth\LoginController@login');
 /* -------- End of Auth Routes -------- */
 
 /* -------- Start of PostCreator -------- */
-Route::group(['prefix' => 'postcreator', 'namespace' => 'postcreator', 'middleware' => 'postware'], function() {
+Route::group(['prefix' => 'postcreator', 'namespace' => 'postcreator'], function() {
     Route::get('/post', 'PostController@index');
-    Route::get('/post/create', 'PostController@create');
-    Route::post('/post/create', 'PostController@store');
-    Route::get('/post/{id}/edit', 'PostController@edit');
-    Route::post('/post/{id}/edit', 'PostController@update');
+    Route::get('/post/{id}/show', 'PostController@show');
+
+    Route::group(['middleware' => 'postware'], function() {
+        Route::get('/post/create', 'PostController@create');
+        Route::post('/post/create', 'PostController@store');
+        Route::get('/post/{id}/edit', 'PostController@edit');
+        Route::post('/post/{id}/edit', 'PostController@update');
+    });
 });
 /* -------- End of PostCreator -------- */
 
@@ -64,6 +68,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin', 'middleware' => 'memb
 
 });
 /* -------- End of Backend -------- */
+
+/* -------- Start of Comments -------- */
+Route::group(['middleware' => 'auth'], function() {
+    Route::post('/comment/create', 'CommentController@store');
+});
+/* -------- End of Comments -------- */
 
 
 

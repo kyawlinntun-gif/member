@@ -22,7 +22,7 @@
 
                             <tr>
                                 <td>{{ $post->id }}</td>
-                                <td><a href="#">{{ $post->title }}</a></td>
+                                <td><a href="{{ url('/postcreator/post/'. $post->id .'/show') }}">{{ $post->title }}</a></td>
                                 <td>{{ $post->content }}</td>
                                 <td>
                                     @if(Auth::id() == $post->user_id)

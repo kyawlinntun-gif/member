@@ -43,16 +43,16 @@
                     @endif
                 @endauth
                 @if(Auth::check())
-                    @if(Auth::user()->hasRole('Manager') || Auth::user()->hasRole('Postwriter'))
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Posts Gen <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ url('/postcreator/post') }}">View all posts</a></li>
-                                <li><a href="{{ url('/postcreator/post/create') }}">Create a post</a></li>
+                                @if(Auth::user()->hasRole('Manager') || Auth::user()->hasRole('Postwriter'))
+                                    <li><a href="{{ url('/postcreator/post/create') }}">Create a post</a></li>
+                                @endif
                             </ul>
                         </li>
-                    @endif
                 @endif
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
