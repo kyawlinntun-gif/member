@@ -31,10 +31,10 @@
 
                     {{-- -------- Start of Posts -------- --}}
                     <h3>Posts</h3>
-                    <a href="#">
+                    <a href="{{ url('/postcreator/post') }}">
                         <button class="btn btn-primary">View All Posts</button>
                     </a>
-                    <a href="#">
+                    <a href="{{ url('/postcreator/post/create') }}">
                         <button class="btn btn-primary">Add Posts</button>
                     </a>
                     {{-- -------- End of Posts -------- --}}

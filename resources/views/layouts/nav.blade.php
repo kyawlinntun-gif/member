@@ -2,7 +2,8 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -41,11 +42,26 @@
                         <li><a href="{{ url('/admin') }}">Admin</a></li>
                     @endif
                 @endauth
+                @if(Auth::check())
+                    @if(Auth::user()->hasRole('Manager') || Auth::user()->hasRole('Postwriter'))
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">Posts Gen <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url('/postcreator/post') }}">View all posts</a></li>
+                                <li><a href="{{ url('/postcreator/post/create') }}">Create a post</a></li>
+                            </ul>
+                        </li>
+                    @endif
+                @endif
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Member <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Member <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         @auth()
-                            <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout').submit();">Logout</a></li>
+                            <li><a href="#"
+                                   onclick="event.preventDefault(); document.getElementById('logout').submit();">Logout</a>
+                            </li>
                             <form action="{{ url('/user/logout') }}" method="post" id="logout" style="display: none;">
                                 @csrf
                             </form>

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\PostCreator;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostInsertFormRequest;
+use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -15,7 +18,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all();
+        return view('backend.post.index', [
+           'posts' => $posts
+        ]);
     }
 
     /**
@@ -37,9 +43,13 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostInsertFormRequest $request)
     {
-        //
+        $slug = uniqid();
+        $user_id = Auth::id();
+        Post::create(['title' => $request->get('title'), 'content' => $request->get('content'), 'slug' => $slug, 'user_id' => $user_id, 'category_id' => $request->get('category_id')]);
+
+        return redirect('/postcreator/post/create')->with('status', 'A Post is successfully updated Sir!');
     }
 
     /**
@@ -61,7 +71,12 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $categories = Category::all();
+        return view('backend.post.edit', [
+            'post' => $post,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -71,9 +86,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostInsertFormRequest $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        if(Auth::id() == $post->user_id) {
+            $post->update(['title' => $request->get('title'), 'content' => $request->get('content'), 'category_id' => $request->get('category_id')]);
+            return redirect()->back()->with('status', 'A Post is successfully updated Sir!');
+        }
+        else
+        {
+            return redirect()->back()->with('error', "This post wasn't created by you!");
+        }
     }
 
     /**

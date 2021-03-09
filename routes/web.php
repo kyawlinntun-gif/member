@@ -27,7 +27,11 @@ Route::post('/user/login', 'Auth\LoginController@login');
 
 /* -------- Start of PostCreator -------- */
 Route::group(['prefix' => 'postcreator', 'namespace' => 'postcreator', 'middleware' => 'postware'], function() {
+    Route::get('/post', 'PostController@index');
     Route::get('/post/create', 'PostController@create');
+    Route::post('/post/create', 'PostController@store');
+    Route::get('/post/{id}/edit', 'PostController@edit');
+    Route::post('/post/{id}/edit', 'PostController@update');
 });
 /* -------- End of PostCreator -------- */
 
